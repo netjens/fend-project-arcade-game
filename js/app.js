@@ -22,11 +22,17 @@ class Enemy {
 
 // Now write your own player class
 class Player {
-  constructor() {}
+  constructor() {
+    this.sprite = "images/char-boy.png";
+    this.x = 2;
+    this.y = 5;
+  }
 
   update() {}
 
-  render() {}
+  render() {
+    ctx.drawImage(Resources.get(this.sprite), this.x * 100, this.y * 80);
+  }
 
   handleInput() {}
 }
