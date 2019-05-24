@@ -14,6 +14,11 @@ class Enemy {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x += 1;
+    console.log(this.x);
+    if (this.x > CANVAS_WIDTH) {
+      this.x = 0;
+    }
   }
 
   // Draw the enemy on the screen, required method for game
