@@ -4,8 +4,8 @@ class Enemy {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = "images/enemy-bug.png";
-    this.x = Math.floor(Math.random() * 3) + 1;
-    this.y = Math.floor(Math.random() * 6);
+    this.x = Math.floor(Math.random() * 5);
+    this.y = Math.floor(Math.random() * 4) + 1;
   }
 
   // Update the enemy's position, required method for game
@@ -18,7 +18,7 @@ class Enemy {
 
   // Draw the enemy on the screen, required method for game
   render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x * 100, this.y * 100);
+    ctx.drawImage(Resources.get(this.sprite), this.x * 100, this.y * 83 - 20);
   }
 }
 
