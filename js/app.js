@@ -18,7 +18,7 @@ class Enemy {
 
   // Draw the enemy on the screen, required method for game
   render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x * 100, this.y * 80);
+    ctx.drawImage(Resources.get(this.sprite), this.x * 100, this.y * 100);
   }
 }
 
@@ -33,10 +33,33 @@ class Player {
   update() {}
 
   render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x * 100, this.y * 80);
+    ctx.drawImage(Resources.get(this.sprite), this.x * 100, this.y * 83 - 10);
   }
 
-  handleInput() {}
+  handleInput(dir) {
+    switch (dir) {
+      case "left":
+        if (this.x > 0) {
+          this.x--;
+        }
+        break;
+      case "up":
+        if (this.y > 0) {
+          this.y--;
+        }
+        break;
+      case "down":
+        if (this.y < 5) {
+          this.y++;
+        }
+        break;
+
+      case "right":
+        if (this.x < 4) {
+          this.x++;
+        }
+    }
+  }
 }
 
 // Now instantiate your objects.
