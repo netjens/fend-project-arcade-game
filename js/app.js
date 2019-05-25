@@ -6,6 +6,7 @@ class Enemy {
     this.sprite = "images/enemy-bug.png";
     this.x = Math.floor(Math.random() * 5);
     this.y = Math.floor(Math.random() * 4) + 1;
+    this.speed = Math.floor(Math.random()*3)+1;
   }
 
   // Update the enemy's position, required method for game
@@ -14,9 +15,10 @@ class Enemy {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += 1;
-    console.log(this.x);
-    if (this.x > CANVAS_WIDTH) {
+    this.x += this.speed*dt;
+    console.log("x=" + this.x);
+    if (this.x *100 > CANVAS_WIDTH) {
+      console.log("end of table reached");
       this.x = 0;
     }
   }
