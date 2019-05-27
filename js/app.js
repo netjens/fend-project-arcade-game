@@ -1,11 +1,11 @@
 // Enemies our player must avoid
 class Enemy {
-  constructor() {
+  constructor(yPos) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = "images/enemy-bug.png";
     this.x = Math.floor(Math.random() * 5);
-    this.y = Math.floor(Math.random() * 4) + 1;
+    this.y = yPos;
     this.speed = Math.floor(Math.random()*3)+1;
   }
 
@@ -16,9 +16,7 @@ class Enemy {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed*dt;
-    console.log("x=" + this.x);
     if (this.x *100 > CANVAS_WIDTH) {
-      console.log("end of table reached");
       this.x = 0;
     }
   }
@@ -35,6 +33,14 @@ class Player {
     this.sprite = "images/char-boy.png";
     this.x = 2;
     this.y = 5;
+  }
+
+  isCollisionWithEnemy(anEnemy) {
+    if(this.x*100 > anEnemy.x*100 && (this.x+1)*100 < (anEnemy.x+1)*100
+    && this.y*83 > anEnemy.y*83 && (this.y+1)*83 < (anEnemy.y+1)*83){
+      return true;
+    }
+    return false;
   }
 
   update() {}
@@ -71,9 +77,10 @@ class Player {
 
 // Now instantiate your objects.
 const allEnemies = [];
-allEnemies.push(new Enemy());
-allEnemies.push(new Enemy());
-allEnemies.push(new Enemy());
+allEnemies.push(new Enemy(1));
+allEnemies.push(new Enemy(2));
+allEnemies.push(new Enemy(3));
+allEnemies.push(new Enemy(4));
 
 const player = new Player();
 

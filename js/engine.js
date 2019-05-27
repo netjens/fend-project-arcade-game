@@ -13,6 +13,9 @@
  * writing app.js a little simpler to work with.
  */
 const CANVAS_WIDTH = 505;
+const CANVAS_HEIGHT = 606;
+
+let isGameStopped = false;
 
 var Engine = (function(global) {
   /* Predefine the variables we'll be using within this scope,
@@ -26,7 +29,7 @@ var Engine = (function(global) {
     lastTime;
 
   canvas.width = CANVAS_WIDTH;
-  canvas.height = 606;
+  canvas.height = CANVAS_HEIGHT;
   doc.body.appendChild(canvas);
 
   /* This function serves as the kickoff point for the game loop itself
@@ -56,7 +59,9 @@ var Engine = (function(global) {
     /* Use the browser's requestAnimationFrame function to call this
      * function again as soon as the browser is able to draw another frame.
      */
-    win.requestAnimationFrame(main);
+    if(!isGameStopped){
+      win.requestAnimationFrame(main);
+    }
   }
 
   /* This function does some initial setup that should only occur once,
@@ -80,7 +85,21 @@ var Engine = (function(global) {
    */
   function update(dt) {
     updateEntities(dt);
-    // checkCollisions();
+    checkCollisions();
+  }
+
+  function checkCollisions(){
+    allEnemies.forEach(function(enemy){
+      if(player.isCollisionWithEnemy(enemy)){
+        ctx.font = "36pt Impact";
+        ctx.textAlign="center";
+        ctx.fillStyle="white";
+        ctx.fillText("Collision",CANVAS_WIDTH/2,40);
+        isGameStopped = true;
+        console.log("collision detected");
+      }
+      
+    })
   }
 
   /* This is called by the update function and loops through all of the
