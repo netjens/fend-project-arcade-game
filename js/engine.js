@@ -59,7 +59,7 @@ var Engine = (function(global) {
     /* Use the browser's requestAnimationFrame function to call this
      * function again as soon as the browser is able to draw another frame.
      */
-    if(!isGameStopped){
+    if(isGameStopped==false){
       win.requestAnimationFrame(main);
     }
   }
@@ -86,6 +86,14 @@ var Engine = (function(global) {
   function update(dt) {
     updateEntities(dt);
     checkCollisions();
+    if(player.y==0){
+      finishGame();
+    }
+  }
+
+  function finishGame(){
+    isGameStopped = true;
+
   }
 
   function checkCollisions(){
@@ -159,6 +167,14 @@ var Engine = (function(global) {
     }
 
     renderEntities();
+    if(isGameStopped){
+      ctx.font = "50px Arial";
+      ctx.strokeStyle="#ff0000";
+      ctx.lineWidth=3;
+      ctx.textAlign="center";
+    
+      ctx.strokeText("Congratulation!!!",250,100);
+    }
   }
 
   /* This function is called by the render function and is called on each game
