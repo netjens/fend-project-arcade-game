@@ -93,10 +93,9 @@ var Engine = (function(global) {
       if(player.isCollisionWithEnemy(enemy)){
         ctx.font = "36pt Impact";
         ctx.textAlign="center";
-        ctx.fillStyle="white";
+        ctx.fillStyle="black";
         ctx.fillText("Collision",CANVAS_WIDTH/2,40);
-        isGameStopped = true;
-        console.log("collision detected");
+        reset();
       }
       
     })
@@ -182,7 +181,8 @@ var Engine = (function(global) {
    * those sorts of things. It's only called once by the init() method.
    */
   function reset() {
-    // noop
+    player.x = 2;
+    player.y = 5;
   }
 
   /* Go ahead and load all of the images we know we're going to need to
