@@ -6,8 +6,16 @@ class Enemy {
     this.sprite = "images/enemy-bug.png";
     this.x = Math.floor(Math.random() * 5);
     this.y = yPos;
-    this.speed = Math.floor(Math.random()*3)+1;
+    this.speed = Math.floor(Math.random() * 3) + 1;
   }
+
+  getXl() {
+    return this.x * 100+20;
+  }
+  getXr() {
+    return this.x * 100 + 100-20;
+  }
+
 
   // Update the enemy's position, required method for game
   // Parameter: dt, a time delta between ticks
@@ -15,8 +23,8 @@ class Enemy {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += this.speed*dt;
-    if (this.x *100 > CANVAS_WIDTH) {
+    this.x += this.speed * dt;
+    if (this.x * 100 > CANVAS_WIDTH) {
       this.x = 0;
     }
   }
@@ -35,9 +43,20 @@ class Player {
     this.y = 5;
   }
 
+  getXl() {
+    return this.x * 100;
+  }
+  getXr() {
+    return this.x * 100 + 100;
+  }
+
+
   isCollisionWithEnemy(anEnemy) {
-    if(this.x*100 > anEnemy.x*100 && (this.x+1)*100 < (anEnemy.x+1)*100
-    && this.y*83 > anEnemy.y*83 && (this.y+1)*83 < (anEnemy.y+1)*83){
+    if (
+      ((this.getXr() > anEnemy.getXl() && this.getXr() < anEnemy.getXr()) ||
+        (this.getXl() < anEnemy.getXr() && this.getXl() > anEnemy.getXl())) &&
+      (this.y == anEnemy.y)
+    ) {
       return true;
     }
     return false;
