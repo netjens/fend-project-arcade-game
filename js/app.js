@@ -1,4 +1,8 @@
 'use strict';
+/*this file provides player and enemy classes + 
+creats the required object-instances +
+handles keyboard input.*/
+
 
 // Enemies our player must avoid
 class Enemy {
@@ -11,18 +15,21 @@ class Enemy {
     this.speed = Math.floor(Math.random() * 3) + 1;
   }
 
+  //get the left position of this Enemy
   getXl() {
     return this.x * 100+20;
   }
+
+  //get the right position of this Enemy
   getXr() {
     return this.x * 100 + 100-20;
   }
 
 
-  // Update the enemy's position, required method for game
+  // Update the enemy's position
   // Parameter: dt, a time delta between ticks
   updatePosition(dt) {
-    // You should multiply any movement by the dt parameter
+    // multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed * dt;
@@ -31,13 +38,13 @@ class Enemy {
     }
   }
 
-  // Draw the enemy on the screen, required method for game
+  // Draw the enemy on the screen
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x * 100, this.y * 83 - 20);
   }
 }
 
-// Now write your own player class
+//The Player Class 
 class Player {
   constructor() {
     this.sprite = "images/char-boy.png";
@@ -52,7 +59,7 @@ class Player {
     return this.x * 100 + 100;
   }
 
-
+  //return true if there is an collision with anEnemy given as parameter
   isCollisionWithEnemy(anEnemy) {
     if (
       ((this.getXr() > anEnemy.getXl() && this.getXr() < anEnemy.getXr()) ||
@@ -64,12 +71,12 @@ class Player {
     return false;
   }
 
-  update() {}
-
+  //paints player on canvas
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x * 100, this.y * 83 - 10);
   }
 
+  //handle keyboard input and assigns player new position. possible values are left, up, down, right
   handleInput(dir) {
     switch (dir) {
       case "left":
@@ -96,7 +103,7 @@ class Player {
   }
 }
 
-// Now instantiate your objects.
+
 const allEnemies = [];
 allEnemies.push(new Enemy(1));
 allEnemies.push(new Enemy(2));
@@ -105,8 +112,8 @@ allEnemies.push(new Enemy(4));
 
 const player = new Player();
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Listener for key presses and sends the keys to 
+// Player.handleInput() method. 
 document.addEventListener("keyup", function(e) {
   var allowedKeys = {
     37: "left",
