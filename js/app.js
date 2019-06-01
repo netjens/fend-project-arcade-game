@@ -1,3 +1,5 @@
+'use strict';
+
 // Enemies our player must avoid
 class Enemy {
   constructor(yPos) {
